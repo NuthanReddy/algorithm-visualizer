@@ -95,20 +95,3 @@ export const snippets = {
     ['def visit_pairs(items):', '    for left in items:', '        for right in items:', '            visit(left, right)'],
   ],
 };
-
-export const courses = [
-  ['Foundations', ['Big-O Notation', 'Memory & Pointers', 'Recursion', 'Divide & Conquer']],
-  ['Arrays & Strings', ['Array traversal', 'Two pointers', 'Sliding window']],
-  ['Linked Lists', ['Singly linked lists', 'Fast & slow pointers']],
-  ['Stacks & Queues', ['Stacks', 'Queues', 'Monotonic stacks']],
-  ['Hashing', ['Hash maps', 'Collision handling']],
-  ['Trees', ['Binary trees', 'Tree traversal']],
-  ['Heaps', ['Priority queues', 'Heap operations']],
-  ['Graphs', ['Breadth-first search', 'Depth-first search']],
-  ['Sorting & Searching', ['Binary search', 'Merge sort', 'Quick sort']],
-  ['Greedy Algorithms', ['Greedy choices']],
-  ['Backtracking', ['Exploring possibilities']],
-  ['Dynamic Programming', ['Memoization', 'Tabulation']],
-  ['Bit Manipulation', ['Bitwise operations']],
-  ['Hard Problems', ['Putting it together']],
-];

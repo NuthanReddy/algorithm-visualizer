@@ -20,9 +20,9 @@ test('seven-step lesson, doubling, history, and persisted completion', async ({ 
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Now you can see the bigger picture.' })).toBeVisible();
   await page.getByRole('button', { name: 'Close dialog' }).click();
-  await expect(page.locator('.progress-fraction')).toHaveText('1 / 1');
+  await expect(page.locator('.progress-fraction')).toHaveText('1 / 86');
   await page.reload();
-  await expect(page.locator('.progress-fraction')).toHaveText('1 / 1');
+  await expect(page.locator('.progress-fraction')).toHaveText('1 / 86');
   await page.locator('.reset-button').click();
   await expect(page).toHaveURL(/big-o\/1$/);
   await page.goBack();
@@ -72,7 +72,7 @@ test('practice answers, challenge feedback and safe progress reset', async ({ pa
   await page.locator('[data-dialog="progress"]').click();
   await page.getByRole('button', { name: 'Reset local progress' }).click();
   await page.getByRole('button', { name: 'Reset progress', exact: true }).click();
-  await expect(page.locator('.progress-fraction')).toHaveText('0 / 1');
+  await expect(page.locator('.progress-fraction')).toHaveText('0 / 86');
   await expect(page).toHaveURL(/big-o\/1$/);
 });
 
@@ -86,7 +86,7 @@ test('mobile layout, course menu and meaningful navigation', async ({ page }) =>
   await page.getByRole('button', { name: 'Open course menu' }).click();
   await expect(page.locator('.sidebar')).toBeVisible();
   await page.locator('.course-group').nth(1).locator('summary').click();
-  await expect(page.locator('.topic.upcoming').filter({ hasText: 'Two pointers' })).toContainText('SOON');
+  await expect(page.locator('.topic').filter({ hasText: 'Two Pointers' })).toHaveAttribute('href', '#/two-pointers/1');
   await page.getByRole('button', { name: 'Close course menu' }).click();
   await page.locator('.next-button').click();
   await expect(page.locator('.metric dd')).toHaveText(['1', '2', '4', '16']);
