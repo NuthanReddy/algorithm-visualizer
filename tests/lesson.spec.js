@@ -51,6 +51,20 @@ test('keyboard, search, code language, theme and dialog behavior', async ({ page
   await expect(page.getByRole('dialog')).not.toBeVisible();
 });
 
+test('search stays open when invoked before a pending step hash change settles', async ({ page }) => {
+  await page.goto('/#/big-o/1');
+  await expect(page.locator('.back-button')).toBeDisabled();
+  await page.evaluate(() => {
+    document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true }));
+  });
+  await expect(page).toHaveURL(/big-o\/2$/);
+  await expect(page.getByRole('searchbox')).toBeVisible();
+  await page.getByRole('searchbox').fill('linear');
+  await page.locator('[data-search-step="5"]').click();
+  await expect(page).toHaveURL(/big-o\/6$/);
+});
+
 test('practice answers, challenge feedback and safe progress reset', async ({ page }) => {
   await page.goto('/#/big-o/1');
   await page.locator('[data-dialog="practice"]').first().click();

@@ -243,10 +243,11 @@ function navigate(index, keepPlaying = false) {
 function syncRoute() {
   const section = location.hash.match(/^#\/(practice|cheatsheet|challenge|progress)$/);
   if (section) { sectionRoute = section[1]; openDialog(section[1], false); return; }
+  const cameFromSection = Boolean(sectionRoute);
   sectionRoute = '';
-  if (dialog.open) dialog.close();
   const match = location.hash.match(/^#\/([a-z0-9-]+)\/(\d+)(?:\?example=(\d+))?$/);
   const requestedId = match?.[1];
+  if (dialog.open && (cameFromSection || (byId[requestedId] && requestedId !== topicId))) dialog.close();
   if (!byId[requestedId]) {
     if (location.hash && location.hash !== '#') toast('That lesson route was not found. Opening Big-O.');
     history.replaceState(null, '', '#/big-o/1');
